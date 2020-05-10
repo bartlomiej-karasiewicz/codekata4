@@ -1,4 +1,6 @@
-package codekata4;
+package codekata4.weather;
+
+import codekata4.commons.LinesExtractor;
 
 import java.util.Comparator;
 import java.util.List;
@@ -7,14 +9,16 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class WeatherData {
-    private List<String[]> linesFromFile = new LinesExtractor().readLinesFromFile();
+    private final String FILE_NAME = "weather.dat";
+    private List<String> linesFromFile = new LinesExtractor(FILE_NAME).readLinesFromFile();
 
     public Map.Entry<Integer, Integer> minimumTemperatureSubtract() {
-        Map.Entry<Integer, Integer> minTemperatureSubtract = linesFromFile
+        List<String[]> linesTransformer = new WeatherLinesTransformer().transformLines(linesFromFile);
+        Map.Entry<Integer, Integer> minTemperatureSubtract = linesTransformer
                 .stream()
-                .map(element -> new Weather(Integer.parseInt(element[Column.DAY.getIndex()]),
-                        Integer.parseInt(element[Column.MAX.getIndex()]),
-                        Integer.parseInt(element[Column.MIN.getIndex()])))
+                .map(element -> new Weather(Integer.parseInt(element[WeatherColumn.DAY.getIndex()]),
+                        Integer.parseInt(element[WeatherColumn.MAX.getIndex()]),
+                        Integer.parseInt(element[WeatherColumn.MIN.getIndex()])))
                 .collect(Collectors.toMap(key -> key.getDay(), value -> value.subtractTemperature()))
                 .entrySet()
                 .stream()
