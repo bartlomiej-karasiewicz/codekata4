@@ -14,8 +14,7 @@ public class WeatherData {
     private final String FILE_NAME;
 
     public Map.Entry<Integer, Integer> minimumTemperatureSubtract() {
-        List<String> linesFromFile = new LinesExtractor().readLinesFromFile(FILE_NAME);
-        List<String[]> linesTransformer = new WeatherLinesTransformer().transformLines(linesFromFile);
+        List<String[]> linesTransformer = new WeatherLinesTransformer().transformLines(new LinesExtractor().readLinesFromFile(FILE_NAME));
         Map.Entry<Integer, Integer> minTemperatureSubtract = linesTransformer
                 .stream()
                 .map(element -> new Weather(Integer.parseInt(element[WeatherColumn.DAY.getIndex()]),

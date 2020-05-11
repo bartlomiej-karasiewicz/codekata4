@@ -13,8 +13,7 @@ public class FootballData {
     private final String FILE_NAME;
 
     public Map.Entry<String, Integer> minimumBilance() {
-        List<String> linesFromFile = new LinesExtractor().readLinesFromFile(FILE_NAME);
-        List<String[]> linesTransformer = new FootballLinesTransformer().transformLines(linesFromFile);
+        List<String[]> linesTransformer = new FootballLinesTransformer().transformLines(new LinesExtractor().readLinesFromFile(FILE_NAME));
         Map.Entry<String, Integer> minimumBilance = linesTransformer.stream().map(element -> new Football(element[FootballColumn.TEAM_NAME.getIndex()],
                 Integer.parseInt(element[FootballColumn.FOR.getIndex()]),
                 Integer.parseInt(element[FootballColumn.AGAINST.getIndex()])))
