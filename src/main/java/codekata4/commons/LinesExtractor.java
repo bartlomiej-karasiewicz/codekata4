@@ -8,14 +8,11 @@ import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 public class LinesExtractor {
 
-    private final String FILE_NAME;
-
-    public List<String> readLinesFromFile() {
+    public List<String> readLinesFromFile(String fileName) {
         List<String> lines = new ArrayList<>();
-        try (LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(FILE_NAME))) {
+        try (LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(fileName))) {
             String currentLine;
             while ((currentLine = lineNumberReader.readLine()) != null) {
                 lines.add(currentLine);
