@@ -1,7 +1,5 @@
 package codekata4.commons;
 
-import lombok.RequiredArgsConstructor;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
